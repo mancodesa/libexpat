@@ -2343,7 +2343,8 @@ XML_Parse(XML_Parser parser, const char *s, int len, int isFinal) {
     parser->m_errorCode = XML_ERROR_INVALID_ARGUMENT;
     return XML_STATUS_ERROR;
   }
-  return XML_Parse64(parser, s, (size_t)len, isFinal ? XML_TRUE : XML_FALSE);
+  const XML_Bool final = isFinal ? XML_TRUE : XML_FALSE;
+  return XML_Parse64(parser, s, (size_t)len, final);
 }
 
 enum XML_Status XMLCALL
