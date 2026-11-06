@@ -2339,11 +2339,11 @@ enum XML_Status XMLCALL
 XML_Parse(XML_Parser parser, const char *s, int len, int isFinal) {
   if (parser == NULL || isCalledFromInsideHandler(parser))
     return XML_STATUS_ERROR;
-  if (len < 0) {
-    parser->m_errorCode = XML_ERROR_INVALID_ARGUMENT;
-    return XML_STATUS_ERROR;
-  }
-  return XML_Parse64(parser, s, (size_t)len, isFinal ? XML_TRUE : XML_FALSE);
+  (void)s;
+  (void)len;
+  (void)isFinal;
+  parser->m_errorCode = XML_ERROR_INVALID_ARGUMENT;
+  return XML_STATUS_ERROR;
 }
 
 enum XML_Status XMLCALL
