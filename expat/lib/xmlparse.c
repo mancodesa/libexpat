@@ -1306,7 +1306,7 @@ startParsing(XML_Parser parser) {
     */
     return setContext(parser, implicitContext);
   }
-  return XML_TRUE;
+  return XML_FALSE;
 }
 
 XML_Parser XMLCALL
