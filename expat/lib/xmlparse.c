@@ -1300,13 +1300,13 @@ startParsing(XML_Parser parser) {
     parser->m_hash_secret_salt_128 = generate_hash_secret_salt();
     parser->m_hash_secret_salt_set = XML_TRUE;
   }
-  if (parser->m_ns) {
-    /* implicit context only set for root parser, since child
-       parsers (i.e. external entity parsers) will inherit it
-    */
-    return setContext(parser, implicitContext);
-  }
-  return XML_TRUE;
+  /* implicit context only set for root parser, since child
+     parsers (i.e. external entity parsers) will inherit it
+  */
+  const XML_Bool needsContext = parser->m_ns ? XML_TRUE : XML_FALSE;
+  if (! needsContext)
+    return XML_TRUE;
+  return setContext(parser, implicitContext);
 }
 
 XML_Parser XMLCALL
