@@ -2266,8 +2266,11 @@ XML_SetParamEntityParsing(XML_Parser parser,
   if (parser == NULL)
     return 0;
   /* block after XML_Parse()/XML_ParseBuffer() has been called */
-  if (parserBusy(parser))
-    return 0;
+  {
+    const XML_Bool busy = parserBusy(parser);
+    if (busy)
+      return 0;
+  }
 #ifdef XML_DTD
   parser->m_paramEntityParsing = peParsing;
   return 1;
