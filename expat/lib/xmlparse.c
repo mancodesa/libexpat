@@ -1677,15 +1677,9 @@ XML_ParserReset(XML_Parser parser, const XML_Char *encodingName) {
 
 static XML_Bool
 parserBusy(XML_Parser parser) {
-  switch (parser->m_parsingStatus.parsing) {
-  case XML_PARSING:
-  case XML_SUSPENDED:
-    return XML_TRUE;
-  case XML_INITIALIZED:
-  case XML_FINISHED:
-  default:
-    return XML_FALSE;
-  }
+  const enum XML_Parsing status = parser->m_parsingStatus.parsing;
+  return (status == XML_PARSING || status == XML_SUSPENDED) ? XML_TRUE
+                                                            : XML_FALSE;
 }
 
 enum XML_Status XMLCALL
